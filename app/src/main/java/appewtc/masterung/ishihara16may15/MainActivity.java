@@ -1,14 +1,18 @@
 package appewtc.masterung.ishihara16may15;
 
+import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -20,6 +24,8 @@ public class MainActivity extends ActionBarActivity {
     private RadioButton choice1RadioButton, choice2RadioButton,
             choice3RadioButton, choice4RadioButton;
     private Button answerButton;
+    private int radioAnInt, indexAnInt;
+    private MyModel objMyModel;
 
 
     @Override
@@ -30,8 +36,135 @@ public class MainActivity extends ActionBarActivity {
         //Bind Widget
         bindWidget();
 
+        //Create Button Controller
+        buttonController();
+
+        //Create Radio Controller
+        radioController();
+
+        //About MyModel
+        aboutMyModel();
+
 
     }   // onCreate
+
+    private void aboutMyModel() {
+
+        objMyModel = new MyModel();
+        objMyModel.setOnMyModelChangeListener(new MyModel.OnMyModelChangeListener() {
+            @Override
+            public void onMyModelChangeListener(MyModel myModel) {
+
+                //Change View by Model
+                changeViewByModel(myModel.getButtonAnInt());
+
+            }   // event
+        });
+
+    }   // aboutMyModel
+
+    private void changeViewByModel(int buttonAnInt) {
+
+        
+
+    }   // changeViewByModel
+
+    private void radioController() {
+
+        choiceRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
+                //Sound Effect
+                MediaPlayer radioMediaPlayer = MediaPlayer.create(getBaseContext(), R.raw.effect_btn_shut);
+                radioMediaPlayer.start();
+
+                //Setup radioAnInt
+                switch (i) {
+                    case R.id.radioButton:
+                        radioAnInt = 1;
+                        break;
+                    case R.id.radioButton2:
+                        radioAnInt = 2;
+                        break;
+                    case R.id.radioButton3:
+                        radioAnInt = 3;
+                        break;
+                    case R.id.radioButton4:
+                        radioAnInt = 4;
+                        break;
+                    default:
+                        radioAnInt = 0;
+                        break;
+                }
+
+            }   // event
+        });
+
+    }   // radioController
+
+    private void buttonController() {
+
+        answerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //Sound Effect
+                MediaPlayer buttonMediaPlayer = MediaPlayer.create(getBaseContext(), R.raw.effect_btn_long);
+                buttonMediaPlayer.start();
+
+                //Check Zero
+                checkZero();
+
+            }   // event
+        });
+
+    }   // buttonController
+
+    private void checkZero() {
+
+        if (radioAnInt == 0) {
+
+            Toast.makeText(MainActivity.this, "กรุณาตอบคำถาม คะ", Toast.LENGTH_SHORT).show();
+
+        } else {
+
+            //Check Times
+            checkTimes();
+
+        }
+
+    }   // checkZero
+
+    private void checkTimes() {
+
+        if (indexAnInt == 9) {
+
+            //Intent To ShowScore
+            intentToShowScore();
+
+        } else {
+
+            //Controller Call View
+            questionTextView.setText(Integer.toString(indexAnInt + 2) + ". What is this ?");
+
+            //Increase
+            indexAnInt += 1;
+
+            //Controller Call Model
+            objMyModel.setButtonAnInt(indexAnInt);
+
+        }
+
+    }   // checkTimes
+
+    private void intentToShowScore() {
+
+        Intent objIntent = new Intent(MainActivity.this, ShowScoreActivity.class);
+        startActivity(objIntent);
+        finish();
+
+    }   // intentToShowScore
 
     private void bindWidget() {
 

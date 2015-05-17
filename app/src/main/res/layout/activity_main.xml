@@ -13,7 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ishihara"
-            android:id="@+id/textView"
+            android:id="@+id/txtTitle"
             android:textSize="35dp"
             android:textStyle="bold"
             android:layout_gravity="center_horizontal"
@@ -34,7 +34,8 @@
             android:layout_height="@dimen/image"
             android:id="@+id/imageView"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/ishihara_01" />
+            android:src="@drawable/ishihara_01"
+            android:contentDescription="Ishihara image" />
 
         <RadioGroup
             android:layout_width="wrap_content"
