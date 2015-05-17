@@ -22,9 +22,9 @@ public class MainActivity extends ActionBarActivity {
     private ImageView ishiharaImageView;
     private RadioGroup choiceRadioGroup;
     private RadioButton choice1RadioButton, choice2RadioButton,
-            choice3RadioButton, choice4RadioButton;
+                        choice3RadioButton, choice4RadioButton;
     private Button answerButton;
-    private int radioAnInt, indexAnInt;
+    private int radioAnInt, indexAnInt, scoreAnInt;
     private MyModel objMyModel;
 
 
@@ -65,7 +65,32 @@ public class MainActivity extends ActionBarActivity {
 
     private void changeViewByModel(int buttonAnInt) {
 
-        
+        //Change Image
+        int intDrawable[] = new int[]{R.drawable.ishihara_01, R.drawable.ishihara_02,
+                R.drawable.ishihara_03, R.drawable.ishihara_04, R.drawable.ishihara_05,
+                R.drawable.ishihara_06, R.drawable.ishihara_07, R.drawable.ishihara_08,
+                R.drawable.ishihara_09, R.drawable.ishihara_10};
+        ishiharaImageView.setImageResource(intDrawable[buttonAnInt]);
+
+        //Change Choice
+        int intChoice[] = new int[10];
+        intChoice[0] = R.array.times1;
+        intChoice[1] = R.array.times2;
+        intChoice[2] = R.array.times3;
+        intChoice[3] = R.array.times4;
+        intChoice[4] = R.array.times5;
+        intChoice[5] = R.array.times6;
+        intChoice[6] = R.array.times7;
+        intChoice[7] = R.array.times8;
+        intChoice[8] = R.array.times9;
+        intChoice[9] = R.array.times10;
+
+        String strChoice[] = new String[4];
+        strChoice = getResources().getStringArray(intChoice[buttonAnInt]);
+        choice1RadioButton.setText(strChoice[0]);
+        choice2RadioButton.setText(strChoice[1]);
+        choice3RadioButton.setText(strChoice[2]);
+        choice4RadioButton.setText(strChoice[3]);
 
     }   // changeViewByModel
 
@@ -129,12 +154,28 @@ public class MainActivity extends ActionBarActivity {
 
         } else {
 
+            //Check Score
+            checkScore();
+
             //Check Times
             checkTimes();
 
         }
 
     }   // checkZero
+
+    private void checkScore() {
+
+        int intAnswer[] = new int[]{1, 2, 3, 1, 2, 3, 1, 2, 4, 4};
+        int intUser[] = new int[10];
+        intUser[indexAnInt] = radioAnInt;
+        if (intUser[indexAnInt] == intAnswer[indexAnInt]) {
+            // scoreAnInt++;
+            scoreAnInt += 1;
+        }
+
+    }   // checkScore
+
 
     private void checkTimes() {
 
