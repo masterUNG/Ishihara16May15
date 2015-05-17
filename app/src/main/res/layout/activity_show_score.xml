@@ -34,6 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Play Again"
+            android:onClick="clickPlay"
             android:id="@+id/button2"
             android:layout_weight="1"
             android:textColor="@color/text" />
@@ -42,6 +43,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Exit"
+            android:onClick="clickExit"
             android:id="@+id/button3"
             android:layout_weight="1"
             android:textColor="@color/text" />
