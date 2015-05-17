@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 
@@ -21,6 +22,16 @@ public class ShowScoreActivity extends ActionBarActivity {
         showScore();
 
     }   // onCreate
+
+    public void clickPlay(View view) {
+
+    }
+
+    public void clickExit(View view) {
+        
+    }
+
+
 
     private void showScore() {
 
