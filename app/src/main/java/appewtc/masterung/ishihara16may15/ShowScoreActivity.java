@@ -4,15 +4,31 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 public class ShowScoreActivity extends ActionBarActivity {
+
+    //Explicit
+    private TextView showScoreTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_score);
-    }
+
+        //Show Score
+        showScore();
+
+    }   // onCreate
+
+    private void showScore() {
+
+        showScoreTextView = (TextView) findViewById(R.id.txtShowScore);
+        int intMyScore = getIntent().getExtras().getInt("Score");
+        showScoreTextView.setText(Integer.toString(intMyScore) + "/10");
+
+    }   // showScore
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -35,4 +51,4 @@ public class ShowScoreActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-}
+}   // Main Class
